@@ -1,0 +1,102 @@
+@font-face {
+    font-family: 'KLCupid';
+    src: url('KLCupid.ttf');
+}
+
+@font-face {
+    font-family: 'FeelLove';
+    src: url('Feeling%20Lovely.ttf');
+}
+
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(43deg, rgb(244, 163, 163), #ef5972);
+}
+
+.container {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+#question {
+    font-size: 90px;
+    margin-bottom: 20px;
+    font-family: 'KLCupid', sans-serif;
+    font-weight: bolder;
+}
+
+#buttons {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+button {
+    font-size: 16px;
+    height: 50px;
+    width: 100px;
+    padding: 20px 40px;
+    margin: 0 10px;
+    cursor: pointer;
+    background: linear-gradient(30deg, #ec4863, rgb(237, 166, 166));
+    border: none;
+    border-radius: 5px;
+    color: #0f0808;
+    font-weight: bold;
+}
+
+button:hover {
+    background: linear-gradient(13deg, white, #ec4863);
+}
+
+#message {
+    font-size: 20px;
+    padding: 10px;
+    justify-content: center;
+    text-align: center;
+    font-weight: bold;
+    color: rgb(86, 0, 23);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#background-hearts {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#background-hearts img {
+    width: 50px;
+    height: auto;
+    margin: 0 10px;
+    padding: 30px;
+}
+
+#sendlove img {
+    height: 300px;
+    width: 300px;
+}
+
+footer {
+    padding-top: 50px;
+    font-weight: bold;
+}
+@media (max-width: 768px) {
+    #question {
+        font-size: 40px;
+    }
+
+    #sendlove img {
+        height: 150px;
+        width: 150px;
+    }
+
+    button {
+        font-size: 10px;
+    }
+}
+
