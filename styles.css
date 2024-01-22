@@ -87,7 +87,7 @@ footer {
 }
 @media (max-width: 768px) {
     #question {
-        font-size: 40px;
+        font-size: 30px;
     }
 
     #sendlove img {
