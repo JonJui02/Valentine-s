@@ -12,10 +12,10 @@ function handleButtonClick(isYes) {
         messageDiv.innerText = "HEHE YAY (P.s: You're stuck with me!) !! I MEAN- YOU SAID YES! Hehe, Anyway Jokes aside I love you <3. See you on the 14th!";
 
         // Optionally, you can replace the existing gifs with 'dance2.gif'
-        sendLoveDiv.innerHTML = '<img src="images/dance2.gif" alt="Dance 2 GIF">';
+        sendLoveDiv.innerHTML = '<img src="Images/dance2.gif" alt="Dance 2 GIF">';
     } else {
         // Change the gif to 'angry.gif'
-        sendLoveDiv.innerHTML = '<img src="images/angry.gif" alt="Angry GIF">';
+        sendLoveDiv.innerHTML = '<img src="Images/angry.gif" alt="Angry GIF">';
 
         // Optionally, you can hide specific elements or perform other actions
         moveButtonAway();
