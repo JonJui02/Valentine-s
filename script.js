@@ -17,9 +17,9 @@ function handleButtonClick(isYes) {
 
     // Trigger the confetti animation
     confetti({
-      particleCount: 150,
-      spread: 70,
-      origin: { y: 0.6 },
+      particleCount: 350,
+      spread: 190,
+      origin: { y: 0.5 },
     });
   } else {
     // Change the gif to 'angry.gif'
