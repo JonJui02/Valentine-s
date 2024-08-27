@@ -112,6 +112,33 @@ button:hover {
   text-align: center; /* Ensure the text is centered */
 }
 
+#final-message {
+  display: none;
+  text-align: center;
+  font-size: 24px;
+  color: white;
+}
+
+#final-message .popup {
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+#final-message img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+#final-message p {
+  margin-top: 10px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #ffcc00;
+}
+
 .button-container {
   display: flex;
   justify-content: center;

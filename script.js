@@ -11,14 +11,11 @@ function handleButtonClick(isYes) {
   if (isYes) {
     questionDiv.style.display = "none";
     buttonsDiv.style.display = "none";
-
     messageDiv.innerText =
-      "We are just kidding! Blessed Birthday Nina! This is just for you! - Love, Airdroitechies ";
+      "We are just kidding! This is just for you! - Love, Airdroitechies ";
     messageDiv.style.color = "white";
-
     sendLoveDiv.innerHTML = '<img src="Images/dance2.gif" alt="Dance 2 GIF">';
 
-    // Trigger confetti three times with a delay
     let confettiCount = 0;
     const confettiInterval = setInterval(() => {
       confetti({
@@ -28,15 +25,14 @@ function handleButtonClick(isYes) {
       });
       confettiCount++;
 
-      // After 3 confetti pops, show the surprise letter
       if (confettiCount === 3) {
         clearInterval(confettiInterval);
         setTimeout(() => {
           surpriseLetterDiv.style.display = "block";
           updateCardVisibility();
-        }, 1000); // Delay to allow the last confetti pop to finish
+        }, 1000);
       }
-    }, 1000); // Adjust the time between each confetti pop (in milliseconds)
+    }, 1000);
   } else {
     sendLoveDiv.innerHTML = '<img src="Images/angry.gif" alt="Angry GIF">';
     moveButtonAway();
@@ -44,16 +40,21 @@ function handleButtonClick(isYes) {
 }
 
 function updateCardVisibility() {
-  cards.forEach((card, index) => {
-    card.style.display = "none";
-  });
-
+  cards.forEach((card) => (card.style.display = "none"));
   cards[currentCardIndex].style.display = "block";
+
+  const nextButton = document.getElementById("nextButton");
+
+  if (currentCardIndex === cards.length - 1) {
+    nextButton.innerText = "For You";
+    nextButton.onclick = showFinalMessage;
+  } else {
+    nextButton.innerText = "Next";
+    nextButton.onclick = viewNextCard;
+  }
 
   document.getElementById("backButton").style.display =
     currentCardIndex > 0 ? "inline-block" : "none";
-  document.getElementById("nextButton").style.display =
-    currentCardIndex < cards.length - 1 ? "inline-block" : "none";
 }
 
 function viewNextCard() {
@@ -70,12 +71,26 @@ function viewPreviousCard() {
   }
 }
 
+function showFinalMessage() {
+  const surpriseLetterDiv = document.getElementById("surprise-letter");
+  const finalMessageDiv = document.getElementById("final-message");
+
+  surpriseLetterDiv.style.display = "none";
+  finalMessageDiv.innerHTML = `
+        <div class="popup">
+            <img src="Images/happy_birthday.jpg" alt="Happy Birthday Image" />
+            <p>HAPPY BIRTHDAY NINA! WE LOVE YOU!</p>
+        </div>
+    `;
+  finalMessageDiv.style.display = "block";
+}
+
 function moveButtonAway() {
   const noButton = document.getElementById("noButton");
   const maxX = window.innerWidth - noButton.offsetWidth;
   const maxY = window.innerHeight - noButton.offsetHeight;
 
-  const maxDistanceFromEdge = 10; // Adjust this value to set the maximum distance from the edges
+  const maxDistanceFromEdge = 10;
   const maxDistanceX = maxX - maxDistanceFromEdge;
   const maxDistanceY = maxY - maxDistanceFromEdge;
 
@@ -88,24 +103,21 @@ function moveButtonAway() {
     Math.min(maxDistanceY, Math.random() * maxDistanceY)
   );
 
-  // Calculate the distance between the current position and the random position
   const distanceX = randomX - noButton.offsetLeft;
   const distanceY = randomY - noButton.offsetTop;
 
-  // Calculate the duration based on the distance, ensuring a minimum duration
   const duration = Math.max(
     0.5,
     Math.min(2, Math.sqrt(distanceX ** 2 + distanceY ** 2) / 100)
   );
 
-  noButton.style.transition = `transform ${duration}s ease-out`; // Use a dynamic duration for gliding
+  noButton.style.transition = `transform ${duration}s ease-out`;
   noButton.style.transform = `translate(${distanceX}px, ${distanceY}px`;
 
-  // Toggle between 'dance.gif' and 'angry.gif' after the gliding animation
   setTimeout(() => {
-    sendLoveDiv.innerHTML = '<img src="dance.gif" alt="Dance GIF">';
+    document.getElementById("sendlove").innerHTML =
+      '<img src="Images/dance.gif" alt="Dance GIF">';
   }, duration * 1000);
 
-  // Remove the click event listener to prevent multiple glides
   noButton.removeEventListener("click", moveButtonAway);
 }

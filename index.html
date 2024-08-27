@@ -54,10 +54,11 @@
         </div>
         <!-- Add more cards as needed -->
         <div class="button-container">
-          <button onclick="viewPreviousCard()">Back</button>
-          <button onclick="viewNextCard()">Next</button>
+          <button id="backButton" onclick="viewPreviousCard()">Back</button>
+          <button id="nextButton" onclick="viewNextCard()">Next</button>
         </div>
       </div>
+      <div id="final-message" class="hidden"></div>
 
       <div id="buttons">
         <button onclick="handleButtonClick(true)">Yes</button>
