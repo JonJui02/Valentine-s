@@ -34,7 +34,7 @@ function handleButtonClick(isYes) {
         clearInterval(confettiInterval);
         setTimeout(() => {
           surpriseLetterDiv.style.display = "block";
-          messageDiv.style.display = "none"
+          messageDiv.style.display = "none";
           updateCardVisibility();
         }, 1000); // Delay to allow the last confetti pop to finish
       }
@@ -47,8 +47,12 @@ function handleButtonClick(isYes) {
 
 function updateCardVisibility() {
   const messageDiv = document.getElementById("message");
-  const backButton = document.querySelector(".button-container button:first-child");
-  const nextButton = document.querySelector(".button-container button:last-child");
+  const backButton = document.querySelector(
+    ".button-container button:first-child"
+  );
+  const nextButton = document.querySelector(
+    ".button-container button:last-child"
+  );
 
   messageDiv.style.display = "none";
   cards.forEach((card, index) => {
