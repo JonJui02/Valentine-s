@@ -17,6 +17,7 @@ function handleButtonClick(isYes) {
     messageDiv.style.color = "white";
 
     sendLoveDiv.innerHTML = '<img src="Images/dance2.gif" alt="Dance 2 GIF">';
+    sendLoveDiv.innerHTML = '<img src="Images/dance2.gif" alt="Dance 2 GIF">';
 
     // Trigger confetti three times with a delay
     let confettiCount = 0;
@@ -39,7 +40,7 @@ function handleButtonClick(isYes) {
       }
     }, 1000); // Adjust the time between each confetti pop (in milliseconds)
   } else {
-    sendLoveDiv.innerHTML = '<img src="Images/angry.gif" alt="Angry GIF">';
+    sendLoveDiv.innerHTML = '<img src="Images/sad.gif" alt="Angry GIF">';
     moveButtonAway();
   }
 }
