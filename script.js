@@ -22,6 +22,7 @@ function handleButtonClick(isYes) {
     // Trigger confetti three times with a delay
     let confettiCount = 0;
     const confettiInterval = setInterval(() => {
+      playConfettiSound(); // Play sound with each confetti pop
       confetti({
         particleCount: 350,
         spread: 190,
@@ -131,13 +132,91 @@ function displayFinalSurprise() {
   surpriseLetterDiv.innerHTML = `
     <div>
       <h2>Airdroitech Presents...</h2>
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/your-video-id" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe id="surprise-video" width="560" height="315" src="https://www.youtube.com/embed/EuciKoS6Hms?autoplay=1&fs=1&enablejsapi=1"
+              title="YouTube video player" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              allowfullscreen></iframe>
     </div>
   `;
 
+  // Initial confetti pop when the video starts playing
+  playConfettiSound();
   confetti({
     particleCount: 500,
     spread: 200,
     origin: { y: 0.6 },
   });
+
+  // Add an event listener for messages from the iframe
+  window.addEventListener("message", function (event) {
+    // Ensure the message is coming from the correct origin
+    if (event.origin === "https://www.youtube.com") {
+      const data = JSON.parse(event.data);
+
+      // Check if the video has ended
+      if (data.event === "onStateChange" && data.info === 0) {
+        // Video ended, trigger confetti twice
+        triggerConfettiTwice();
+      }
+    }
+  });
+
+  // Function to initialize the YouTube player (required for postMessage API)
+  function onYouTubeIframeAPIReady() {
+    new YT.Player("surprise-video", {
+      events: {
+        onStateChange: onPlayerStateChange,
+      },
+    });
+  }
+}
+
+function triggerConfettiTwice() {
+  let confettiCount = 0;
+  const confettiInterval = setInterval(() => {
+    playConfettiSound(); // Play sound with each confetti pop
+    confetti({
+      particleCount: 500,
+      spread: 200,
+      origin: { y: 0.6 },
+    });
+    confettiCount++;
+
+    if (confettiCount === 2) {
+      clearInterval(confettiInterval);
+    }
+  }, 1000); // Delay between each confetti pop (in milliseconds)
+}
+
+// Function to play confetti sound
+function playConfettiSound() {
+  const audio = new Audio("Images/firework.mp3");
+
+  // Lower the initial volume (e.g., 50% of the original volume)
+  audio.volume = 0.35;
+
+  // Play the audio
+  audio.play();
+
+  // Duration of the fade-out effect in milliseconds
+  const fadeDuration = 1000; // 1 second
+  const fadeStep = 0.005; // The amount to decrease the volume each step
+  const fadeInterval = fadeDuration / (audio.volume / fadeStep);
+
+  // Function to gradually reduce the volume
+  function fadeOutAudio() {
+    const fadeIntervalId = setInterval(() => {
+      if (audio.volume > fadeStep) {
+        audio.volume -= fadeStep; // Decrease the volume
+      } else {
+        audio.pause(); // Stop the audio
+        audio.currentTime = 0; // Reset to the beginning
+        clearInterval(fadeIntervalId); // Stop the interval
+      }
+    }, fadeInterval);
+  }
+
+  // Set a timeout to start fading out after the desired play duration
+  const playDuration = 2000; // 2 seconds
+  setTimeout(fadeOutAudio, playDuration);
 }
