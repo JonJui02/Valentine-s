@@ -68,7 +68,7 @@ button:hover {
   justify-content: center;
   text-align: center;
   font-weight: bold;
-  color: rgb(86, 0, 23);
+  color: rgb(255, 255, 255);
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -95,6 +95,8 @@ button:hover {
   text-align: center;
   margin-top: 20px;
   position: relative;
+  color: rgb(255, 255, 255);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 #surprise-letter button {
@@ -129,7 +131,7 @@ button:hover {
 
 .card h3 {
   font-family: "FeelLove", sans-serif;
-  color: #ec4863;
+  color: #07440f;
 }
 
 .card p {

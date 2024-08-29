@@ -33,6 +33,7 @@ function handleButtonClick(isYes) {
         clearInterval(confettiInterval);
         setTimeout(() => {
           surpriseLetterDiv.style.display = "block";
+          messageDiv.style.display = "none"
           updateCardVisibility();
         }, 1000); // Delay to allow the last confetti pop to finish
       }
@@ -44,16 +45,26 @@ function handleButtonClick(isYes) {
 }
 
 function updateCardVisibility() {
+  const messageDiv = document.getElementById("message");
+  const backButton = document.querySelector(".button-container button:first-child");
+  const nextButton = document.querySelector(".button-container button:last-child");
+
+  messageDiv.style.display = "none";
   cards.forEach((card, index) => {
     card.style.display = "none";
   });
 
   cards[currentCardIndex].style.display = "block";
 
-  document.getElementById("backButton").style.display =
-    currentCardIndex > 0 ? "inline-block" : "none";
-  document.getElementById("nextButton").style.display =
-    currentCardIndex < cards.length - 1 ? "inline-block" : "none";
+  if (currentCardIndex === cards.length - 1) {
+    nextButton.innerText = "Finish";
+    nextButton.onclick = displayFinalSurprise;
+  } else {
+    nextButton.innerText = "Next";
+    nextButton.onclick = viewNextCard;
+  }
+
+  backButton.style.display = currentCardIndex > 0 ? "inline-block" : "none";
 }
 
 function viewNextCard() {
@@ -108,4 +119,20 @@ function moveButtonAway() {
 
   // Remove the click event listener to prevent multiple glides
   noButton.removeEventListener("click", moveButtonAway);
+}
+
+function displayFinalSurprise() {
+  const surpriseLetterDiv = document.getElementById("surprise-letter");
+  surpriseLetterDiv.innerHTML = `
+    <div>
+      <h2>Airdroitech Presents...</h2>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/your-video-id" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  `;
+
+  confetti({
+    particleCount: 500,
+    spread: 200,
+    origin: { y: 0.6 },
+  });
 }
